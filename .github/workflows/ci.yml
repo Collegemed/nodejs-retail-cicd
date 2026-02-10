@@ -1,8 +1,9 @@
-name: Node.js CI Pipeline
+name: Node.js CI/CD Pipeline
 
 on:
   push:
     branches:
+      - dev
       - main
   pull_request:
     branches:
@@ -10,6 +11,7 @@ on:
 
 jobs:
   test:
+    name: Run Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +24,20 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run unit tests
         run: npm test
+
+  docker-build:
+    name: Build Docker Image
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t retail-nodejs-app:latest .
