@@ -1,4 +1,4 @@
-name: Node.js CI/CD Pipeline
+name: CI/CD Pipeline for Node.js Retail App
 
 on:
   push:
@@ -10,8 +10,8 @@ on:
       - main
 
 jobs:
-  test:
-    name: Run Tests
+  ci-test:
+    name: CI - Run Unit Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +22,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: npm
 
       - name: Install dependencies
         run: npm install
@@ -29,9 +30,9 @@ jobs:
       - name: Run unit tests
         run: npm test
 
-  docker-build:
-    name: Build Docker Image
-    needs: test
+  cd-docker:
+    name: CD - Build Docker Image
+    needs: ci-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
