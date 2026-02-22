@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retail App - Login</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:linear-gradient(135deg,#1e3a8a,#2563eb);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    /* Main Container */
+    .login-container{
+      background:#fff;
+      width:900px;
+      max-width:95%;
+      display:flex;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 15px 35px rgba(0,0,0,0.3);
+    }
+
+    /* Left Section */
+    .login-left{
+      flex:1;
+      background:linear-gradient(135deg,#0f172a,#1e40af);
+      color:#fff;
+      padding:50px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .login-left h1{
+      font-size:36px;
+      margin-bottom:20px;
+    }
+
+    .login-left p{
+      font-size:15px;
+      line-height:1.6;
+      opacity:0.9;
+    }
+
+    .login-left img{
+      width:250px;
+      margin:30px auto 0;
+    }
+
+    /* Right Section */
+    .login-right{
+      flex:1;
+      padding:50px 40px;
+    }
+
+    .login-right h2{
+      text-align:center;
+      margin-bottom:30px;
+      color:#1e293b;
+    }
+
+    /* Input Box */
+    .input-box{
+      margin-bottom:20px;
+    }
+
+    .input-box label{
+      display:block;
+      margin-bottom:6px;
+      font-weight:500;
+      color:#334155;
+    }
+
+    .input-box input{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid #cbd5e1;
+      border-radius:6px;
+      outline:none;
+      font-size:14px;
+      transition:0.3s;
+    }
+
+    .input-box input:focus{
+      border-color:#2563eb;
+      box-shadow:0 0 5px rgba(37,99,235,0.4);
+    }
+
+    /* Password Toggle */
+    .password-box{
+      position:relative;
+    }
+
+    .password-box span{
+      position:absolute;
+      right:12px;
+      top:50%;
+      transform:translateY(-50%);
+      cursor:pointer;
+      color:#64748b;
+      font-size:14px;
+    }
+
+    /* Remember + Forgot */
+    .options{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+      font-size:14px;
+    }
+
+    .options a{
+      text-decoration:none;
+      color:#2563eb;
+    }
+
+    .options a:hover{
+      text-decoration:underline;
+    }
+
+    /* Button */
+    .btn{
+      width:100%;
+      padding:12px;
+      background:#2563eb;
+      border:none;
+      color:#fff;
+      font-weight:600;
+      border-radius:6px;
+      cursor:pointer;
+      transition:0.3s;
+      font-size:16px;
+    }
+
+    .btn:hover{
+      background:#1d4ed8;
+    }
+
+    /* Divider */
+    .divider{
+      text-align:center;
+      margin:25px 0;
+      position:relative;
+      color:#64748b;
+      font-size:14px;
+    }
+
+    .divider::before,
+    .divider::after{
+      content:"";
+      position:absolute;
+      width:40%;
+      height:1px;
+      background:#cbd5e1;
+      top:50%;
+    }
+
+    .divider::before{ left:0; }
+    .divider::after{ right:0; }
+
+    /* Social Login */
+    .social-login{
+      display:flex;
+      gap:15px;
+    }
+
+    .social-btn{
+      flex:1;
+      padding:10px;
+      border:1px solid #cbd5e1;
+      border-radius:6px;
+      background:#fff;
+      cursor:pointer;
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    .social-btn:hover{
+      background:#f1f5f9;
+    }
+
+    /* Register */
+    .register{
+      text-align:center;
+      margin-top:25px;
+      font-size:14px;
+    }
+
+    .register a{
+      color:#2563eb;
+      text-decoration:none;
+      font-weight:500;
+    }
+
+    .register a:hover{
+      text-decoration:underline;
+    }
+
+    /* Error Message */
+    .error{
+      color:red;
+      font-size:13px;
+      margin-top:5px;
+      display:none;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      .login-container{
+        flex-direction:column;
+      }
+
+      .login-left{
+        padding:35px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+
+    <!-- Left Panel -->
+    <div class="login-left">
+      <h1>Welcome Back!</h1>
+      <p>
+        Login to access your account, manage orders,
+        and enjoy personalized shopping experience.
+      </p>
+      <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt="Shopping">
+    </div>
+
+    <!-- Right Panel -->
+    <div class="login-right">
+      <h2>Login to RetailMart</h2>
+
+      <form id="loginForm">
+
+        <!-- Email -->
+        <div class="input-box">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="Enter your email">
+          <div class="error" id="emailError">Please enter valid email</div>
+        </div>
+
+        <!-- Password -->
+        <div class="input-box password-box">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Enter your password">
+          <span onclick="togglePassword()">Show</span>
+          <div class="error" id="passError">Password must be at least 6 characters</div>
+        </div>
+
+        <!-- Options -->
+        <div class="options">
+          <label>
+            <input type="checkbox" id="remember"> Remember me
+          </label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit" class="btn">Login</button>
+
+        <!-- Divider -->
+        <div class="divider">OR</div>
+
+        <!-- Social -->
+        <div class="social-login">
+          <button type="button" class="social-btn">Google</button>
+          <button type="button" class="social-btn">Facebook</button>
+        </div>
+
+        <!-- Register -->
+        <div class="register">
+          Don’t have an account? <a href="#">Register</a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+
+    const form = document.getElementById("loginForm");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+
+    const emailError = document.getElementById("emailError");
+    const passError = document.getElementById("passError");
+
+    /* Toggle Password */
+    function togglePassword(){
+      if(password.type === "password"){
+        password.type = "text";
+        event.target.innerText = "Hide";
+      }else{
+        password.type = "password";
+        event.target.innerText = "Show";
+      }
+    }
+
+    /* Form Validation */
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+
+      let valid = true;
+
+      // Email Validation
+      if(!email.value.includes("@") || email.value.trim()===""){
+        emailError.style.display = "block";
+        valid = false;
+      }else{
+        emailError.style.display = "none";
+      }
+
+      // Password Validation
+      if(password.value.length < 6){
+        passError.style.display = "block";
+        valid = false;
+      }else{
+        passError.style.display = "none";
+      }
+
+      // If Valid
+      if(valid){
+        const remember = document.getElementById("remember").checked;
+
+        if(remember){
+          localStorage.setItem("email", email.value);
+        }
+
+        alert("Login Successful! Redirecting...");
+
+        // Redirect (Change to your homepage)
+        window.location.href = "index.html";
+      }
+    });
+
+    /* Auto Fill Remembered Email */
+    window.onload = function(){
+      const savedEmail = localStorage.getItem("email");
+      if(savedEmail){
+        email.value = savedEmail;
+        document.getElementById("remember").checked = true;
+      }
+    }
+
+  </script>
+
+</body>
+</html>
