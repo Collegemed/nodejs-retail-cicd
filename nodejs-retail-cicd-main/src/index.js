@@ -19,6 +19,12 @@ app.use(express.static(path.join(__dirname, "../frontend")));
 ===================== */
 
 /* Health Check Route */
+/* Root Health Route (for tests) */
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "OK"
+  });
+});
 app.get("/health", (req, res) => {
   res.status(200).json({
     status: "OK",
