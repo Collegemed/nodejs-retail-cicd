@@ -9,19 +9,25 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
+                dir('nodejs-retail-cicd-main') {
+                    bat 'npm install'
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'npm test'
+                dir('nodejs-retail-cicd-main') {
+                    bat 'npm test'
+                }
             }
         }
 
         stage('Lint Code') {
             steps {
-                bat 'npm run lint'
+                dir('nodejs-retail-cicd-main') {
+                    bat 'npm run lint'
+                }
             }
         }
 
