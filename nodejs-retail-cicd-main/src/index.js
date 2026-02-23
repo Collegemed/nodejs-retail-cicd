@@ -3,28 +3,18 @@ const path = require("path");
 
 const app = express();
 
-/* =====================
-   MIDDLEWARE
-===================== */
 app.use(express.json());
 
 /* =====================
-   STATIC FRONTEND ROUTE
-   Serves HTML/CSS/JS
-===================== */
-app.use(express.static(path.join(__dirname, "../frontend")));
-
-/* =====================
-   API ROUTES
+   API ROUTES FIRST
 ===================== */
 
-/* Health Check Route */
-/* Root Health Route (for tests) */
 app.get("/", (req, res) => {
   res.status(200).json({
     status: "OK"
   });
 });
+
 app.get("/health", (req, res) => {
   res.status(200).json({
     status: "OK",
@@ -32,7 +22,6 @@ app.get("/health", (req, res) => {
   });
 });
 
-/* Products Route */
 app.get("/products", (req, res) => {
   res.json([
     { id: 1, name: "Laptop", price: 800, category: "Electronics" },
@@ -44,8 +33,11 @@ app.get("/products", (req, res) => {
 });
 
 /* =====================
-   SERVER START
+   STATIC FRONTEND LAST
 ===================== */
+
+app.use(express.static(path.join(__dirname, "../frontend")));
+
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
