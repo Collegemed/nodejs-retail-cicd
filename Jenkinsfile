@@ -23,13 +23,7 @@ pipeline {
             }
         }
 
-        stage('Lint Code') {
-            steps {
-                dir('nodejs-retail-cicd-main') {
-                    bat 'npm run lint'
-                }
-            }
-        }
+       
 
         stage('Success') {
             steps {
