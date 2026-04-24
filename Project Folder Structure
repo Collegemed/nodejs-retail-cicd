@@ -1,0 +1,14 @@
+nodejs-retail-cicd/
+├── src/
+│   └── index.js
+├── tests/
+│   └── app.test.js
+├── package.json
+├── Dockerfile
+├── .dockerignore
+├── k8s/
+│   ├── deployment.yaml
+│   └── service.yaml
+└── .github/
+    └── workflows/
+        └── ci-cd.yml

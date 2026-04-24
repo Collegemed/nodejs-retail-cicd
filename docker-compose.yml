@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  retail-app:
+    build: .
+    container_name: retail_app_container
+    ports:
+      - "3000:3000"
+    restart: always

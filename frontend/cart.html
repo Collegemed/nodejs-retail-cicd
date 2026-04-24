@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retail App - Cart</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f1f5f9;
+      color:#1e293b;
+    }
+
+    /* Navbar */
+    header{
+      background:#020617;
+      color:#fff;
+      padding:15px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    header h1{
+      font-size:24px;
+    }
+
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      margin-left:20px;
+      font-weight:500;
+    }
+
+    nav a:hover{
+      color:#38bdf8;
+    }
+
+    /* Cart Container */
+    .cart-container{
+      max-width:1100px;
+      margin:40px auto;
+      background:#fff;
+      border-radius:10px;
+      padding:30px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .cart-container h2{
+      margin-bottom:25px;
+      text-align:center;
+    }
+
+    /* Cart Table */
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-bottom:25px;
+    }
+
+    th,td{
+      padding:12px;
+      text-align:center;
+      border-bottom:1px solid #e2e8f0;
+    }
+
+    th{
+      background:#f8fafc;
+      font-weight:600;
+    }
+
+    td img{
+      width:70px;
+      height:70px;
+      object-fit:contain;
+    }
+
+    /* Quantity Control */
+    .qty-box{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:8px;
+    }
+
+    .qty-box button{
+      width:28px;
+      height:28px;
+      border:none;
+      background:#2563eb;
+      color:#fff;
+      border-radius:4px;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    .qty-box button:hover{
+      background:#1d4ed8;
+    }
+
+    .qty-box span{
+      min-width:25px;
+      display:inline-block;
+    }
+
+    /* Remove Button */
+    .remove-btn{
+      background:#dc2626;
+      color:#fff;
+      border:none;
+      padding:6px 12px;
+      border-radius:4px;
+      cursor:pointer;
+      font-size:13px;
+    }
+
+    .remove-btn:hover{
+      background:#b91c1c;
+    }
+
+    /* Summary */
+    .summary{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:20px;
+      flex-wrap:wrap;
+      gap:15px;
+    }
+
+    .summary-box{
+      background:#f8fafc;
+      padding:20px;
+      border-radius:8px;
+      min-width:250px;
+    }
+
+    .summary-box p{
+      margin-bottom:8px;
+      display:flex;
+      justify-content:space-between;
+    }
+
+    .summary-box h3{
+      margin-bottom:10px;
+    }
+
+    /* Buttons */
+    .actions{
+      display:flex;
+      gap:15px;
+    }
+
+    .btn{
+      padding:10px 20px;
+      border:none;
+      border-radius:5px;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .btn-shop{
+      background:#64748b;
+      color:#fff;
+    }
+
+    .btn-shop:hover{
+      background:#475569;
+    }
+
+    .btn-checkout{
+      background:#22c55e;
+      color:#fff;
+    }
+
+    .btn-checkout:hover{
+      background:#16a34a;
+    }
+
+    /* Empty Cart */
+    .empty{
+      text-align:center;
+      padding:40px;
+      display:none;
+    }
+
+    .empty h3{
+      margin-bottom:15px;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      header{
+        padding:15px 25px;
+      }
+
+      .cart-container{
+        padding:20px;
+      }
+
+      table{
+        font-size:14px;
+      }
+
+      .summary{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <h1>RetailMart</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- Cart Section -->
+  <div class="cart-container">
+
+    <h2>Your Shopping Cart</h2>
+
+    <!-- Empty Cart -->
+    <div class="empty" id="emptyCart">
+      <h3>Your cart is empty 🛒</h3>
+      <p>Start shopping and add items to your cart.</p>
+    </div>
+
+    <!-- Cart Table -->
+    <table id="cartTable">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody id="cartBody">
+        <!-- Items inserted by JS -->
+      </tbody>
+    </table>
+
+    <!-- Summary -->
+    <div class="summary" id="summarySection">
+
+      <div class="summary-box">
+        <h3>Order Summary</h3>
+        <p><span>Subtotal</span><span>₹<span id="subTotal">0</span></span></p>
+        <p><span>Tax (5%)</span><span>₹<span id="tax">0</span></span></p>
+        <p><span>Shipping</span><span>₹<span id="shipping">50</span></span></p>
+        <hr>
+        <p><strong>Total</strong><strong>₹<span id="grandTotal">0</span></strong></p>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-shop" onclick="goShopping()">Continue Shopping</button>
+        <button class="btn btn-checkout" onclick="checkout()">Checkout</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+
+    /* Sample Cart Data (Replace with Backend/LocalStorage Later) */
+    let cart = [
+      {
+        id:1,
+        name:"Smartphone",
+        price:15999,
+        qty:1,
+        img:"smartphone.webp"
+      },
+      {
+        id:2,
+        name:"Headphones",
+        price:2499,
+        qty:1,
+        img:"headphone.webp"
+      }
+    ];
+
+
+    const cartBody = document.getElementById("cartBody");
+    const emptyCart = document.getElementById("emptyCart");
+    const cartTable = document.getElementById("cartTable");
+    const summarySection = document.getElementById("summarySection");
+
+    const subTotalEl = document.getElementById("subTotal");
+    const taxEl = document.getElementById("tax");
+    const shippingEl = document.getElementById("shipping");
+    const grandTotalEl = document.getElementById("grandTotal");
+
+
+    /* Render Cart */
+    function renderCart(){
+
+      cartBody.innerHTML = "";
+
+      if(cart.length === 0){
+        emptyCart.style.display = "block";
+        cartTable.style.display = "none";
+        summarySection.style.display = "none";
+        return;
+      }
+
+      emptyCart.style.display = "none";
+      cartTable.style.display = "table";
+      summarySection.style.display = "flex";
+
+      cart.forEach((item,index)=>{
+
+        let row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td><img src="${item.img}"></td>
+          <td>${item.name}</td>
+          <td>₹${item.price}</td>
+          <td>
+            <div class="qty-box">
+              <button onclick="decreaseQty(${index})">-</button>
+              <span>${item.qty}</span>
+              <button onclick="increaseQty(${index})">+</button>
+            </div>
+          </td>
+          <td>₹${item.price * item.qty}</td>
+          <td><button class="remove-btn" onclick="removeItem(${index})">Remove</button></td>
+        `;
+
+        cartBody.appendChild(row);
+      });
+
+      updateSummary();
+    }
+
+
+    /* Increase Quantity */
+    function increaseQty(index){
+      cart[index].qty++;
+      renderCart();
+    }
+
+    /* Decrease Quantity */
+    function decreaseQty(index){
+      if(cart[index].qty > 1){
+        cart[index].qty--;
+      }
+      renderCart();
+    }
+
+    /* Remove Item */
+    function removeItem(index){
+      cart.splice(index,1);
+      renderCart();
+    }
+
+
+    /* Update Summary */
+    function updateSummary(){
+
+      let subtotal = 0;
+
+      cart.forEach(item=>{
+        subtotal += item.price * item.qty;
+      });
+
+      let tax = Math.round(subtotal * 0.05);
+      let shipping = subtotal > 0 ? 50 : 0;
+      let grandTotal = subtotal + tax + shipping;
+
+      subTotalEl.innerText = subtotal;
+      taxEl.innerText = tax;
+      shippingEl.innerText = shipping;
+      grandTotalEl.innerText = grandTotal;
+    }
+
+
+    /* Navigation */
+    function goShopping(){
+      window.location.href = "index.html";
+    }
+
+    function checkout(){
+      if(cart.length === 0){
+        alert("Your cart is empty!");
+        return;
+      }
+
+      alert("Order placed successfully! ✅");
+
+      cart = [];
+      renderCart();
+    }
+
+
+    /* Initial Load */
+    renderCart();
+
+  </script>
+
+</body>
+</html>

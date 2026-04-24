@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retail App - Contact Us</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f1f5f9;
+      color:#1e293b;
+    }
+
+    /* Navbar */
+    header{
+      background:#020617;
+      color:#fff;
+      padding:15px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    header h1{
+      font-size:24px;
+    }
+
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      margin-left:20px;
+      font-weight:500;
+    }
+
+    nav a:hover{
+      color:#38bdf8;
+    }
+
+    /* Container */
+    .contact-container{
+      max-width:1100px;
+      margin:40px auto;
+      padding:30px;
+    }
+
+    .contact-container h2{
+      text-align:center;
+      margin-bottom:15px;
+      font-size:32px;
+    }
+
+    .contact-container p{
+      text-align:center;
+      margin-bottom:40px;
+      color:#475569;
+    }
+
+    /* Layout */
+    .contact-box{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+    }
+
+    /* Info Box */
+    .contact-info{
+      background:#fff;
+      padding:30px;
+      border-radius:10px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .contact-info h3{
+      margin-bottom:20px;
+    }
+
+    .info-item{
+      margin-bottom:15px;
+      font-size:15px;
+    }
+
+    .info-item span{
+      font-weight:600;
+      color:#2563eb;
+    }
+
+    /* Form Box */
+    .contact-form{
+      background:#fff;
+      padding:30px;
+      border-radius:10px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .contact-form h3{
+      margin-bottom:20px;
+    }
+
+    /* Inputs */
+    .input-box{
+      margin-bottom:18px;
+    }
+
+    .input-box label{
+      display:block;
+      margin-bottom:6px;
+      font-weight:500;
+    }
+
+    .input-box input,
+    .input-box textarea{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid #cbd5e1;
+      border-radius:6px;
+      outline:none;
+      font-size:14px;
+      transition:0.3s;
+      resize:none;
+    }
+
+    .input-box input:focus,
+    .input-box textarea:focus{
+      border-color:#2563eb;
+      box-shadow:0 0 5px rgba(37,99,235,0.4);
+    }
+
+    textarea{
+      height:120px;
+    }
+
+    /* Button */
+    .btn{
+      width:100%;
+      padding:12px;
+      background:#2563eb;
+      border:none;
+      color:#fff;
+      font-weight:600;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:16px;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      background:#1d4ed8;
+    }
+
+    /* Errors */
+    .error{
+      color:red;
+      font-size:13px;
+      margin-top:5px;
+      display:none;
+    }
+
+    /* Success */
+    .success{
+      color:green;
+      text-align:center;
+      margin-top:15px;
+      display:none;
+      font-weight:500;
+    }
+
+    /* Map */
+    .map{
+      margin-top:40px;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    iframe{
+      width:100%;
+      height:300px;
+      border:0;
+    }
+
+    /* Responsive */
+    @media(max-width:768px){
+      header{
+        padding:15px 25px;
+      }
+
+      .contact-box{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <h1>RetailMart</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <!-- Contact Section -->
+  <div class="contact-container">
+
+    <h2>Contact Us</h2>
+    <p>Have questions? We’d love to hear from you.</p>
+
+    <div class="contact-box">
+
+      <!-- Info -->
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+
+        <div class="info-item"><span>Email:</span> nagaraditya156@gmail.com</div>
+        <div class="info-item"><span>Phone:</span> +91 1234567894</div>
+        <div class="info-item"><span>Address:</span> New Delhi, India</div>
+        <div class="info-item"><span>Working Hours:</span> Mon - Sat (9AM - 7PM)</div>
+
+        <p style="margin-top:20px;color:#475569;">
+          Our support team is available to help you with orders, payments, and deliveries.
+        </p>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form">
+        <h3>Send Message</h3>
+
+        <form id="contactForm">
+
+          <div class="input-box">
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+            <div class="error" id="nameError">Name is required</div>
+          </div>
+
+          <div class="input-box">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="Enter your email">
+            <div class="error" id="emailError">Enter valid email</div>
+          </div>
+
+          <div class="input-box">
+            <label>Subject</label>
+            <input type="text" id="subject" placeholder="Enter subject">
+            <div class="error" id="subjectError">Subject is required</div>
+          </div>
+
+          <div class="input-box">
+            <label>Message</label>
+            <textarea id="message" placeholder="Write your message"></textarea>
+            <div class="error" id="messageError">Message is required</div>
+          </div>
+
+          <button type="submit" class="btn">Send Message</button>
+
+          <div class="success" id="successMsg">Message sent successfully! ✅</div>
+
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Map -->
+    <div class="map">
+      <iframe 
+        src="https://maps.google.com/maps?q=New%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed">
+      </iframe>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+
+    const form = document.getElementById("contactForm");
+
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const subjectInput = document.getElementById("subject");
+    const messageInput = document.getElementById("message");
+
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const subjectError = document.getElementById("subjectError");
+    const messageError = document.getElementById("messageError");
+
+    const successMsg = document.getElementById("successMsg");
+
+
+    /* Form Validation */
+    form.addEventListener("submit", function(e){
+      e.preventDefault();
+
+      let valid = true;
+
+      // Name
+      if(nameInput.value.trim() === ""){
+        nameError.style.display = "block";
+        valid = false;
+      }else{
+        nameError.style.display = "none";
+      }
+
+      // Email
+      if(!emailInput.value.includes("@") || emailInput.value.trim()===""){
+        emailError.style.display = "block";
+        valid = false;
+      }else{
+        emailError.style.display = "none";
+      }
+
+      // Subject
+      if(subjectInput.value.trim() === ""){
+        subjectError.style.display = "block";
+        valid = false;
+      }else{
+        subjectError.style.display = "none";
+      }
+
+      // Message
+      if(messageInput.value.trim() === ""){
+        messageError.style.display = "block";
+        valid = false;
+      }else{
+        messageError.style.display = "none";
+      }
+
+
+      // If Valid
+      if(valid){
+        successMsg.style.display = "block";
+
+        // Clear form
+        form.reset();
+
+        setTimeout(()=>{
+          successMsg.style.display = "none";
+        },3000);
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
