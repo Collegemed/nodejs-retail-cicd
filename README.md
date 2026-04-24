@@ -1,150 +1,123 @@
-Node.js Retail Application — CI/CD Project
- Project Title
-
-    CI/CD Pipeline Implementation for Node.js Retail Application
-
- Problem Statement
-
-    Design and implement a professional CI/CD pipeline for a Node.js Retail application (source: https://github.com/Collegemed/nodejs-retail-cicd.git).
-
-    The workflow must automate the entire software delivery lifecycle, including:
-
-    Automated unit testing upon every commit
-
-    Containerized artifact creation upon merging to the production branch
-
-    Ensuring high code quality
-
-    Enabling rapid, reliable deployments suited for enterprise environments
-
-    This CI/CD implementation leverages GitHub Actions (or optionally Jenkins) to automate tests, container builds, and pipeline workflows for every change in the repository.
-
-Project Overview
-
-    Modern enterprise application delivery requires automation for:
-
-    Rapid feedback on code
-
-    Repeatable builds
-
-    Reliable deployments
-
-    Automated artifact creation
-
-    This project demonstrates a professional DevOps approach through a CI/CD pipeline that integrates:
-
-    Node.js application
-
-    Unit tests
-
-    Docker containerization
-
-    GitHub Actions CI/CD workflows
-
-    Objectives
-
-The core objectives of this project are:
-
-    Automated unit testing on every commit via GitHub Actions
-
-    Build Docker image upon successful merge to main or production
-
-    Verify code quality and integrity
-
-    Containerized artifact creation for deployment
-
-    Support eventual deployment to production (cloud or container registry)
-
-    Ensure reliability, consistency, reproducibility of builds
-
-Technology Stack
-
-    Category	          Technology
-    Language           Node.js
-    Server            	Express
-    Testing           	Jest / Supertest
-    CI/CD             	GitHub Actions
-    Containerization	  Docker
-    Repository	        GitHub
-    Deployment Target 	Docker Registry / Kubernetes
-
-CI/CD Architecture
+Node.js Retail CI/CD Application
  
-  Workflow Overview
-  
-    Git Push → GitHub Actions Trigger
-           ↓
-    Unit Tests Run Automatically
-           ↓
-    Test Pass → Build Docker Image
-           ↓
-    Docker Image Push to Registry
-           ↓
-    Approval / Merge to Production
-           ↓
-    Production Image Build + Tagging
-           ↓
-    Deployment (Future: Cloud / EMS / Kubernetes)
+Overview
 
-Repository Structure
+    This project is a DevOps-oriented retail web application designed to demonstrate the integration of modern software development practices with Continuous Integration (CI), containerization, and automation.
 
-    nodejs-retail-cicd/
-    ├── .github/
-    │   └── workflows/
-    │       └── ci.yml                  # CI pipeline definition
-    ├── frontend/                       # Static UI
-    ├── src/                            # App backend
-    ├── tests/                          # Unit tests
-    ├── Dockerfile
-    ├── docker-compose.yml
-    ├── package.json
-    ├── README.md
-    └── .gitignore
+    Built using Node.js and Express.js, the application provides RESTful APIs and a lightweight frontend, supported by a fully automated CI pipeline using GitHub Actions and containerized deployment using Docker.
 
-CI/CD Workflow — GitHub Actions
+Objectives
 
-    The GitHub Actions pipeline (ci.yml) performs the following stages:
-
-    Checkout code
-
-    Install dependencies
-
-    Run unit tests
-
-    Build Docker image
-
-    Push Docker image on production branch
+    Develop a scalable full-stack retail web application
+    Implement RESTful APIs for structured communication
+    Automate build and testing using GitHub Actions
+    Ensure environment consistency via Docker containerization
+    Design a CI/CD-ready architecture (Jenkins-compatible)
+    Follow industry-standard DevOps best practices
 
 Features
 
-    CI pipeline for automated tests
-    Docker builds on merge to production
-    Ensures code quality automation
-    Container-ready artifacts
-    Modular and extendable for cloud deployments
-    Enterprise-ready delivery automation
+  Backend
+  
+    Node.js with Express.js framework
+  
+  RESTful APIs:
+  
+    /health — Application health check
+    /products — Product data retrieval
+ 
+  Frontend
+   
+    Static UI using HTML, CSS, and JavaScript
+    API-driven dynamic content rendering
+    DevOps & Automation
+    Continuous Integration using GitHub Actions
+    Docker-based containerization
+    Docker Compose for multi-service execution
+    Jenkins-ready CI/CD pipeline structure
 
-Contributors / Team Members
+ System Architecture
+   
+    Developer → GitHub Repository → CI Pipeline (GitHub Actions)
+             → Build & Test → Docker Image Creation
+             → Deployment via Docker / Docker Compose
 
-    Malya Singh
+Workflow
+    
+    Code is pushed to GitHub
+    CI pipeline is triggered automatically
+    Dependencies are installed and tests are executed
+    Docker image is built
+    Application runs in a containerized environment
 
-    Nikhil Kumar Verma 
+ Technology Stack
+ 
+     Layer	Technology
+     Frontend	HTML, CSS, JavaScript
+     Backend	Node.js, Express.js
+     CI Tool	GitHub Actions
+     Container	Docker, Docker Compose
+     Version Control	Git, GitHub
+     Environment	Linux
+
+Installation & Setup
+
+    Run Locally
+    git clone <repository-url>
+    cd nodejs-retail-cicd
+    npm install
+    npm start
+    Run with Docker
+    docker build -t retail-app .
+    docker run -p 3000:3000 retail-app
+    Run with Docker Compose
+    docker-compose up --build
+
+Continuous Integration
+
+    The project uses GitHub Actions to automate:
+
+        Dependency installation
+        Build process
+        Application testing
+
+    This ensures that every code change is validated before integration.
+
+ Key Outcomes
+
+    Fully functional retail web application
+    Automated CI pipeline
+    Containerized and portable deployment
+    Clean and modular DevOps project structure
+
+Limitations
+   
+    No authentication or authorization system
+    No database integration (uses static/mock data)
+    No payment gateway integration
+    Not deployed to cloud (local/container-based execution only)
+
+Future Enhancements
+    
+    Integrate databases (MongoDB / PostgreSQL)
+    Implement full CI/CD pipeline using Jenkins
+    Deploy to cloud platforms (AWS / Azure)
+    Introduce Kubernetes for orchestration
+    Add authentication and security layers
+    Integrate monitoring tools (Prometheus, Grafana)
+
+Contributors
 
     Aditya Agrawal
-
-    Atharv shukla
-
+    Atharv Shukla
+    Verma Nikhil Kumar Vipin Kumar
+    Malya Singh
     Mohit Gupta
 
-Contact
-
-For questions or support related to this project:
-
-    Email: nikkumver@gmail.com
-
-    GitHub: https://github.com/Collegemed/nodejs-retail-cicd
+Institution: Medicaps University
+Course: DevOps – Datagami Skill Based Course
+Project Number: DO-41
 
 Conclusion
 
-    This project demonstrates a professional, automated CI/CD workflow for a Node.js Retail application. By leveraging GitHub Actions and Docker, we achieve automated testing, container creation, and enterprise-ready delivery pipelines.
-
+    This project demonstrates a practical implementation of DevOps principles, combining application development with automation and containerization. It provides a strong foundation for building scalable, maintainable, and production-ready systems.
